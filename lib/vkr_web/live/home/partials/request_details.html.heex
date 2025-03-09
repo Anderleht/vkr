@@ -1,0 +1,42 @@
+<% request_fields =
+  ~w(method path host remote_ip remote_port http_version body_length)a %>
+<.data_table
+  :if={@request}
+  id="request-details-table"
+  collection_name="Request Details"
+  data={Map.take(@request, request_fields)}
+  titlefy={true}
+/>
+<.data_table
+  :if={@request.query_params && @request.query_params != %{}}
+  id="query-params-table"
+  collection_name="Query Parameters"
+  data={@request.query_params}
+  titlefy={false}
+/>
+<.data_table
+  :if={@request.headers && @request.headers != %{}}
+  id="headers-table"
+  collection_name="Headers"
+  data={@request.headers}
+  titlefy={false}
+/>
+<.data_table
+  :if={@request.cookies && @request.cookies != %{}}
+  id="cookies-table"
+  collection_name="Cookies"
+  data={@request.cookies}
+  titlefy={false}
+/>
+<div :if={@request.body} id="body-data" class="col-span-2 mt-8 md:mt-2">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div class="px-6 pt-4">
+        <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Body
+        </h5>
+        <.request_body_content data={@request.body} />
+      </div>
+    </div>
+  </div>
+</div>
