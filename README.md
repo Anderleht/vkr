@@ -41,6 +41,19 @@ git clone https://github.com/Anderleht/vkr && cd vkr
 asdf install
 ```
 
+### Установка в режиме отладки:
+
+```bash
+mv .example.env.local .env.local
+
+mix setup
+```
+
+или используя [just](https://github.com/casey/just)
+```bash
+just start_dev
+```
+
 ## Использование
 
 Перейдите по ссылке `http://localhost:4000/` и вас должно перенаправить на `http://localhost:4000/<session_id>`.
